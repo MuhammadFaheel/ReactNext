@@ -1,0 +1,479 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 40px 20px;
+  max-width: 100%;
+}
+
+.headerCard {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  max-width: 95%;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.headerCard h1 {
+  color: #333;
+  margin: 0 0 10px 0;
+  font-size: 28px;
+}
+
+.subtitle {
+  color: #666;
+  margin: 0;
+  font-size: 14px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 95%;
+  width: 100%;
+}
+
+.section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sectionHeading {
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.subsection {
+  padding: 20px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.subsection:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.subsectionTitle {
+  color: #666;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.required {
+  color: #e74c3c;
+}
+
+.input,
+.select,
+.textarea,
+.fileInput {
+  padding: 10px 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus,
+.fileInput:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.input:disabled,
+.select:disabled,
+.textarea:disabled,
+.fileInput:disabled {
+  background-color: #f8f9fa;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 0;
+}
+
+
+
+/* Attachment Styles */
+.attachmentList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.attachmentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  font-size: 13px;
+}
+
+/* Reviewer Styles */
+.addItemGroup {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.addButton,
+.removeButton {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.addButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: 2px solid #667eea;
+}
+
+.addButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.addButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.removeButton {
+  background: #fee;
+  color: #c33;
+  padding: 6px 10px;
+  font-size: 16px;
+  border: 2px solid #c33;
+}
+
+.removeButton:hover:not(:disabled) {
+  background: #fdd;
+}
+
+.itemList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  font-size: 13px;
+}
+
+/* Approval Styles */
+.approvalList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.approvalItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
+.approvalInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.approvalName {
+  font-weight: 600;
+  color: #333;
+  font-size: 13px;
+  min-width: 120px;
+}
+
+.statusSelect {
+  padding: 6px 10px;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  background: white;
+}
+
+.statusSelect.status-pending {
+  color: #f59e0b;
+}
+
+.statusSelect.status-approved {
+  color: #10b981;
+}
+
+.statusSelect.status-rejected {
+  color: #ef4444;
+}
+
+.emptyText {
+  color: #999;
+  font-size: 13px;
+  margin: 0;
+  text-align: center;
+  padding: 15px;
+}
+
+.suggestedApprovers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e9ecef;
+}
+
+.suggestedLabel {
+  width: 100%;
+  color: #666;
+  font-size: 12px;
+  margin: 0 0 8px 0;
+}
+
+.suggestedButton {
+  padding: 6px 10px;
+  border: 2px dashed #667eea;
+  background: #f0f3ff;
+  color: #667eea;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.suggestedButton:hover:not(:disabled) {
+  background: #667eea;
+  color: white;
+}
+
+/* History Styles */
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.historyItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #667eea;
+  font-size: 13px;
+}
+
+.historyTime {
+  color: #999;
+  font-size: 12px;
+  min-width: 160px;
+  font-family: monospace;
+}
+
+.historyAction {
+  color: #333;
+  font-weight: 600;
+  flex: 1;
+}
+
+.historyUser {
+  color: #666;
+  font-size: 12px;
+}
+
+/* Error */
+.error {
+  background-color: #fee;
+  color: #c33;
+  padding: 12px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  border-left: 4px solid #c33;
+}
+
+.buttonGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.cancelButton,
+.submitButton {
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.cancelButton {
+  background: #e9ecef;
+  color: #333;
+  border: 2px solid #999;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: #dee2e6;
+}
+
+.submitButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: 2px solid #667eea;
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.successMessage {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.checkmark {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin: 0 auto 20px;
+  animation: scaleIn 0.5s ease;
+}
+
+.successMessage h2 {
+  color: #333;
+  margin: 0 0 10px 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.successMessage p {
+  color: #666;
+  margin: 0;
+  font-size: 14px;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+
+  .headerCard {
+    padding: 20px;
+    margin-bottom: 15px;
+  }
+
+  .headerCard h1 {
+    font-size: 24px;
+  }
+
+  .section {
+    padding: 20px;
+  }
+
+  .sectionHeading {
+    font-size: 16px;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .addItemGroup {
+    grid-template-columns: 1fr;
+  }
+}
