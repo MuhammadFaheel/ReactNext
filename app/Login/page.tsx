@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
@@ -9,6 +10,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,57 +21,82 @@ export default function Login() {
       return;
     }
 
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+    setIsSubmitting(true);
 
-    const data = await res.json();
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (!res.ok) {
-      setError(data.error || 'Login failed');
-      return;
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Login failed");
+        return;
+      }
+
+      window.localStorage.setItem("token", "demo-token");
+      document.cookie = "auth_token=demo-token; path=/; max-age=86400; SameSite=Lax";
+      router.push("/Dashboard");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    window.localStorage.setItem("token", "demo-token");
-    router.push("/Dashboard");
   };
 
   return (
     <main className={styles.container}>
       <section className={styles.card}>
-        <h1 className={styles.title}>Login</h1>
-        <p className={styles.description}>Enter your credentials to continue to the dashboard.</p>
+        <div className={styles.brand}>Welcome back</div>
+        <h1 className={styles.title}>Sign in to your account</h1>
+        <p className={styles.description}>
+          Access your dashboard and continue where you left off.
+        </p>
 
-        <form onSubmit={handleSubmit}>
-          <label className={styles.formLabel} htmlFor="email">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            className={styles.input}
-          />
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.fieldGroup}>
+            <label className={styles.label} htmlFor="email">
+              Email address
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              className={styles.input}
+              placeholder="you@example.com"
+              autoComplete="email"
+            />
+          </div>
 
-          <label className={styles.formLabel} htmlFor="password">
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            className={styles.input}
-          />
+          <div className={styles.fieldGroup}>
+            <label className={styles.label} htmlFor="password">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              className={styles.input}
+              placeholder="Enter your password"
+              autoComplete="current-password"
+            />
+          </div>
 
           {error && <p className={styles.error}>{error}</p>}
 
-          <button type="submit" className={styles.submitButton}>
-            Sign In
+          <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
+            {isSubmitting ? "Signing in..." : "Sign In"}
           </button>
+
+          <p className={styles.helperText}>
+            Don&apos;t have an account?{" "}
+            <Link className={styles.link} href="/Register">
+              Create one
+            </Link>
+          </p>
         </form>
       </section>
     </main>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
+import { useRouter } from 'next/navigation';
 
 interface NFAFormData {
   subject: string;
@@ -44,6 +45,7 @@ export default function Form() {
   const [newReviewer, setNewReviewer] = useState('');
   const [newApproval, setNewApproval] = useState('');
   const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     // Initialize history only on client to avoid hydration mismatch
@@ -174,6 +176,10 @@ export default function Form() {
     ]);
   };
 
+  const back = () => {
+    router.push("/Dashboard");
+  };
+
   if (submitted) {
     return (
       <div className={styles.container}>
@@ -192,8 +198,11 @@ export default function Form() {
     <div className={styles.container}>
       {/* Header Section */}
       <div className={styles.headerCard}>
-        <h1>Note For Approval</h1>
-        <p className={styles.subtitle}>Submit your request for approval</p>
+        <div>
+          <h1>Note For Approval</h1>
+          <p className={styles.subtitle}>Submit your request for approval</p>
+        </div>
+        <button onClick={back} className={styles.backButton}>Back</button>
       </div>
 
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -488,24 +497,25 @@ export default function Form() {
           </div>
         </div>
 
-        {error && <div className={styles.error}>{error}</div>}
-
-        <div className={styles.buttonGroup}>
-          <button
-            type="button"
-            onClick={resetForm}
-            className={styles.cancelButton}
-            disabled={loading}
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className={styles.submitButton}
-            disabled={loading}
-          >
-            {loading ? 'Submitting...' : 'Submit for Approval'}
-          </button>
+        <div className={styles.section}>
+          {error && <div className={styles.error}>{error}</div>}
+          <div className={styles.buttonGroup}>
+            <button
+              type="button"
+              onClick={resetForm}
+              className={styles.cancelButton}
+              disabled={loading}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className={styles.submitButton}
+              disabled={loading}
+            >
+              {loading ? 'Submitting...' : 'Submit for Approval'}
+            </button>
+          </div>
         </div>
       </form>
     </div>
