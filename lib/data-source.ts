@@ -5,7 +5,7 @@ const config: sql.config = {
   database: process.env.DB_DATABASE,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  port: 1433,
+  port: Number(process.env.DB_PORT) || 1433,
   options: {
     encrypt: true,
     trustServerCertificate: true,
@@ -19,7 +19,7 @@ const config: sql.config = {
 
 let pool: sql.ConnectionPool | null = null;
 
-export async function getConnection() {
+export async function getDataSource() {
   if (!pool || !pool.connected) {
     pool = new sql.ConnectionPool(config);
     await pool.connect();

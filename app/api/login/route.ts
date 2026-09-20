@@ -1,15 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getConnection } from '@/lib/db';
+import { getDataSource } from '@/lib/data-source';
 
 export async function POST(req: NextRequest) {
-  const { email, password } = await req.json();
-
   try {
-    const pool = await getConnection();
+    const { email, password } = await req.json();
+    console.log('Login attempt:', email);
+
+    const pool = await getDataSource();
     const result = await pool.request()
       .input('email', email)
       .input('password', password)
-      .query('SELECT * FROM [NFA].[dbo].[User] WHERE Email = @email AND Password = @password');
+      .query('SELECT * FROM [dbo].[User] WHERE Email = @email AND Password = @password');
+
+    console.log('User found:', result.recordset.length);
 
     if (result.recordset.length === 0) {
       return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
@@ -17,7 +20,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, user: result.recordset[0] });
   } catch (err) {
-    console.error('DB error:', err);
-    return NextResponse.json({ error: 'Server error' }, { status: 500 });
+    console.error('DB error:', String(err));
+    return NextResponse.json({ error: String(err) }, { status: 500 });
   }
 }

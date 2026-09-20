@@ -22,7 +22,6 @@ export default function Login() {
     }
 
     setIsSubmitting(true);
-
     try {
       const res = await fetch("/api/login", {
         method: "POST",
@@ -38,8 +37,9 @@ export default function Login() {
       }
 
       window.localStorage.setItem("token", "demo-token");
-      document.cookie = "auth_token=demo-token; path=/; max-age=86400; SameSite=Lax";
       router.push("/Dashboard");
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
     }

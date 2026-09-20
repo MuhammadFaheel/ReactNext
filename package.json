@@ -9,20 +9,23 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "mssql": "^12.5.4",
-    "next": "^16.2.6",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "mssql": "^12.7.2",
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "reflect-metadata": "^0.2.2",
+    "tedious": "^20.0.0",
+    "typeorm": "^1.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/mssql": "^12.3.0",
-    "@types/node": "^20",
+    "@types/node": "^26",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.1.6",
+    "eslint": "^10",
+    "eslint-config-next": "16.3.5",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5.9.3"
   }
 }
